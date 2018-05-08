@@ -20,6 +20,8 @@
     <string name="age_two">age...</string>
     <string name="Save">Save</string>
     <string name="delete">Delete</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
 
     <!--Save & Delete-->
 

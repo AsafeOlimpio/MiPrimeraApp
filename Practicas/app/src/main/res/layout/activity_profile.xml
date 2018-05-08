@@ -8,6 +8,8 @@
     android:layout_margin="10dp"
     tools:context=".ProfileActivity">
 
+    <!-- Texts -->
+
     <TextView
         android:id="@+id/textView"
         style="@style/asafes_textStyle"
@@ -41,6 +43,37 @@
         android:hint="@string/enter_password"
         style="@style/input_type" />
 
+    <!-- Gender -->
+
+    <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_margin="10dp"
+            android:padding="4dp"
+            android:background="@color/colorBackground">
+
+            <TextView
+                style="@style/asafes_textStyle"
+                android:text="@string/gender"/>
+
+            <RadioButton
+                android:id="@+id/radio_button_male"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="@string/male"/>
+
+            <RadioButton
+                android:id="@+id/radio_button_female"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="@string/female"/>
+
+    </RadioGroup>
+
+    <!-- Age -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,23 +92,9 @@
             android:inputType="number"
             android:hint="@string/age_two"/>
 
-
-
-        <!--RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="1dp"
-            android:background="@color/colorBackground">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gender"/>
-
-        </RadioGroup-->
-
     </LinearLayout>
+
+    <!-- Save & Delete -->
 
     <LinearLayout
         android:layout_width="match_parent"
