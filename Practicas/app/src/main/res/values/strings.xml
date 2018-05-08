@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">Test</string>
-    <string name="text_correct_way">Testing...</string>
+    <string name="text_correct_way">Open Second Activity</string>
+    <string name="open_google">Open Google</string>
+    <string name="phonenumber">Call 1234</string>
+    <string name="open_gmail">Open Gmail</string>
+
+    <!--App-->
+
+    <string name="username">Username</string>
+    <string name="enter_username">username...</string>
+    <string name="email">Email</string>
+    <string name="enter_email">email...</string>
+    <string name="password">Password</string>
+    <string name="enter_password">password...</string>
+
+    <!--Gender & Age-->
+    <string name="gender">Gender:</string>
+    <string name="age">Age:</string>
+    <string name="age_two">age...</string>
+    <string name="Save">Save</string>
+    <string name="delete">Delete</string>
+
+    <!--Save & Delete-->
+
 </resources>
