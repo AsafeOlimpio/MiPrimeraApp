@@ -29,6 +29,7 @@
     
     <Button
         style="@style/my_button"
+        android:text="@string/profile"
         android:onClick="oppf"/>
 
 </LinearLayout>

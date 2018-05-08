@@ -4,6 +4,11 @@
     <string name="open_google">Open Google</string>
     <string name="phonenumber">Call 1234</string>
     <string name="open_gmail">Open Gmail</string>
+    <string name="profile">Profile</string>
+
+    <!--Error-->
+
+    <string name="empty_user">User cannot be empty!</string>
 
     <!--App-->
 
@@ -14,7 +19,7 @@
     <string name="password">Password</string>
     <string name="enter_password">password...</string>
 
-    <!--Gender & Age-->
+    <!--Gender & Age | Save & Delete-->
     <string name="gender">Gender:</string>
     <string name="age">Age:</string>
     <string name="age_two">age...</string>
@@ -23,6 +28,11 @@
     <string name="male">male</string>
     <string name="female">female</string>
 
-    <!--Save & Delete-->
+    <!-- Login, Cancel & Register-->
+    <string name="login">login:</string>
+    <string name="cancel">cancel:</string>
+    <string name="register">register:</string>
+
+
 
 </resources>

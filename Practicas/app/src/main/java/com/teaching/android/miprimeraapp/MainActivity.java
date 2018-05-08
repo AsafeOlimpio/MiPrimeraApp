@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void oppf(View view) {
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
