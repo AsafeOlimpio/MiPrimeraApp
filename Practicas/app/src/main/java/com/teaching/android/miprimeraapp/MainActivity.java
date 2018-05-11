@@ -4,11 +4,16 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+/*Importamos Support Tollbar v7*/
+import android.support.v7.widget.Toolbar;
+
 
 import java.net.*;
 
@@ -16,10 +21,16 @@ public class MainActivity extends AppCompatActivity {
 
     /*LifeCycle*/
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
+        setSupportActionBar(myToolbar);
+        //No necesita parametros
+        getSupportActionBar();
     }
 
 

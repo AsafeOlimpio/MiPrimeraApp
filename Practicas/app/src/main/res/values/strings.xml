@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Test</string>
+    <string name="app_name">Film Library</string>
     <string name="text_correct_way">Open Second Activity</string>
     <string name="open_google">Open Google</string>
     <string name="phonenumber">Call 1234</string>
@@ -33,5 +33,9 @@
     <string name="cancel">cancel:</string>
     <string name="register">register:</string>
 
+    <!--List Practice-->
+    <string name="sherlock">The Adventures of Sherlock Holmes</string>
+    <string name="alienist">The Alienist</string>
+    <string name="tintin">The Adventures of Tintin</string>
 
 </resources>

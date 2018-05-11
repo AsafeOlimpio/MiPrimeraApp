@@ -1,8 +1,10 @@
 package com.teaching.android.miprimeraapp;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +20,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         usernameEditText = findViewById(R.id.user);
         passwordEditText = findViewById(R.id.password);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
+        setSupportActionBar(myToolbar);
+        myToolbar.setTitle("Login");
+        //No necesita parametros
+        getSupportActionBar();
+
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void Login(View view) {
@@ -45,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void register(View view) {
-        Intent register = new Intent(this, LoginActivity.class);
+        Intent register = new Intent(this, ProfileActivity.class);
         startActivity(register);
     }
 }
