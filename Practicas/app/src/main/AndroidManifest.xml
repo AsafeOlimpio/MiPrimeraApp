@@ -11,21 +11,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-        </activity>
+
+        <activity android:name=".MainActivity" />
+
         <activity android:name=".SecondActivity" />
-        <activity android:name=".ProfileActivity"
-            android:parentActivityName=".LoginActivity"/>
-        <activity android:name=".LoginActivity"
-            android:parentActivityName=".ListActivity">
-        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".LoginActivity" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:parentActivityName=".ListActivity" />
         <activity android:name=".GalleryActivity" />
+
         <activity android:name=".ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".FragmentTestActivity"
+            android:label="@string/title_activity_fragment_test"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".FilmDetailActivity"
+            android:parentActivityName=".ListActivity">
         </activity>
     </application>
 

@@ -11,12 +11,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.teaching.android.miprimeraapp.Interactors.FilmsInteractor;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ListActivity extends AppCompatActivity {
     //ArrayList filmNames [];
@@ -49,10 +52,23 @@ public class ListActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.list);
         listView.setAdapter(new MyAdapter());
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(ListActivity.this,FilmDetailActivity.class);
+                    int filmId = new FilmsInteractor().getFilms().get(position).getId();
+                    intent.putExtra("film_id",filmId);
+                    startActivity(intent);
+                }
+        });
+
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
         setSupportActionBar(myToolbar);
         //No necesita parametros
         getSupportActionBar();
+
+
     }
 
     private class MyAdapter extends BaseAdapter{
