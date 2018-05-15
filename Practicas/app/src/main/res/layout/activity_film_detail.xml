@@ -4,50 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FilmDetailActivity">
+    tools:context=".filmdetailactivity.FilmDetailActivity">
 
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <include layout="@layout/main_toolbar"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <WebView android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:id="@+id/web_view" />
+        </android.support.v4.view.ViewPager>
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/photo_layout"
-        android:layout_below="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:padding="5dp">
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/sherlock_holmes"
-            />
-    </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/photo_layout"
-        android:padding="5dp">
-
-        <TextView
-            android:id="@+id/lorem_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lorem_ipsum"
-            style="@style/asafes_film_detail"/>
-
-        <Button
-            android:id="@+id/wt_button"
-            android:layout_below="@id/lorem_text"
-            android:layout_gravity="bottom"
-            style="@style/my_button"
-            android:text="@string/whatch_trailer"
-            android:onClick="wt"/>
-
-    </RelativeLayout>
 
 </RelativeLayout>

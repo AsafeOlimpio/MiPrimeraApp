@@ -1,8 +1,7 @@
-package com.teaching.android.miprimeraapp;
+package com.teaching.android.miprimeraapp.profileactivity;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +16,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.teaching.android.miprimeraapp.R;
 
 import java.util.Calendar;
 
@@ -85,7 +86,6 @@ public class ProfileActivity extends AppCompatActivity {
         myToolbar.setTitle("Profile");
         //No necesita parametros
         getSupportActionBar();
-
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
     }

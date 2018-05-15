@@ -6,6 +6,8 @@ import com.teaching.android.miprimeraapp.Interactors.FilmsInteractor;
 import com.teaching.android.miprimeraapp.Model.FilmModel;
 import com.teaching.android.miprimeraapp.view.FilmDetailView;
 
+import java.util.ArrayList;
+
 public class FilmDetailPresenter {
     private FilmsInteractor filmsInteractor;
     private FilmDetailView filmDetailView;
@@ -18,6 +20,10 @@ public class FilmDetailPresenter {
     public void loadFilmWithId(int id){
         FilmModel filmModel = filmsInteractor.getFilmWithId(id);
         filmDetailView.onFilmLoaded(filmModel);
+    }
+
+    public ArrayList<FilmModel> getFilms(){
+        return filmsInteractor.getFilms();
     }
 }
 

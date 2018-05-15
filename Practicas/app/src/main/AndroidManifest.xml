@@ -12,19 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".mainactivity.MainActivity" />
 
         <activity android:name=".SecondActivity" />
         <activity
-            android:name=".ProfileActivity"
-            android:parentActivityName=".LoginActivity" />
+            android:name=".profileactivity.ProfileActivity"
+            android:parentActivityName=".loginactivity.LoginActivity" />
 
         <activity
-            android:name=".LoginActivity"
-            android:parentActivityName=".ListActivity" />
+            android:name=".loginactivity.LoginActivity"
+            android:parentActivityName=".activitylist.ListActivity" />
         <activity android:name=".GalleryActivity" />
 
-        <activity android:name=".ListActivity">
+        <activity android:name=".activitylist.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,8 +36,8 @@
             android:label="@string/title_activity_fragment_test"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".FilmDetailActivity"
-            android:parentActivityName=".ListActivity">
+        <activity android:name=".filmdetailactivity.FilmDetailActivity"
+            android:parentActivityName=".activitylist.ListActivity">
         </activity>
     </application>
 

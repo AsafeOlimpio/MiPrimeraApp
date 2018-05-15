@@ -1,4 +1,4 @@
-package com.teaching.android.miprimeraapp;
+package com.teaching.android.miprimeraapp.loginactivity;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+
+import com.teaching.android.miprimeraapp.R;
+import com.teaching.android.miprimeraapp.profileactivity.ProfileActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

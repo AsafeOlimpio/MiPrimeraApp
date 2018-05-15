@@ -1,4 +1,4 @@
-package com.teaching.android.miprimeraapp;
+package com.teaching.android.miprimeraapp.activitylist;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +17,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.teaching.android.miprimeraapp.Interactors.FilmsInteractor;
-
-import java.util.ArrayList;
-import java.util.Calendar;
+import com.teaching.android.miprimeraapp.loginactivity.LoginActivity;
+import com.teaching.android.miprimeraapp.R;
+import com.teaching.android.miprimeraapp.filmdetailactivity.FilmDetailActivity;
 
 public class ListActivity extends AppCompatActivity {
     //ArrayList filmNames [];
@@ -56,8 +56,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(ListActivity.this,FilmDetailActivity.class);
-                    int filmId = new FilmsInteractor().getFilms().get(position).getId();
-                    intent.putExtra("film_id",filmId);
+                    intent.putExtra("position",position);
                     startActivity(intent);
                 }
         });

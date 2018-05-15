@@ -1,4 +1,4 @@
-package com.teaching.android.miprimeraapp;
+package com.teaching.android.miprimeraapp.mainactivity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -14,6 +14,10 @@ import android.view.View;
 /*Importamos Support Tollbar v7*/
 import android.support.v7.widget.Toolbar;
 
+
+import com.teaching.android.miprimeraapp.GalleryActivity;
+import com.teaching.android.miprimeraapp.R;
+import com.teaching.android.miprimeraapp.SecondActivity;
 
 import java.net.*;
 
