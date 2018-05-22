@@ -29,9 +29,9 @@
     <string name="female">female</string>
 
     <!-- Login, Cancel & Register-->
-    <string name="login">login:</string>
-    <string name="cancel">cancel:</string>
-    <string name="register">register:</string>
+    <string name="login">login</string>
+    <string name="cancel">cancel</string>
+    <string name="register">register</string>
 
     <!--List Practice-->
     <string name="sherlock">The Adventures of Sherlock Holmes</string>
@@ -44,7 +44,7 @@
     <string name="profile_dialog_yes">Yes</string>
     <string name="profile_dialog_no">No</string>
     <string name="profile_dialog_cancel">cancel</string>
-    <string name="profile_dialog_deletinguser">Deleting User...</string>
+    <string name="profile_dialog_deletinguser">Deleting User…</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -59,5 +59,14 @@
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
         ex ea commodo consequat.</string>
     <string name="whatch_trailer">Whatch Trailer</string>
+    <string name="sSite">https://www.youtube.com/watch?v=EQS7bRXrr5g</string>
+    <string name="aSite">https://www.youtube.com/watch?v=YtzgFRBvRy8</string>
+    <string name="tSite">https://www.youtube.com/watch?v=7NWtW699XME</string>
+
+    <!--Login Preferences File-->
+    <string name="login_preference_file">com.android.teaching.miprimeraapp.LOGIN_PREFERENCE_FILE</string>
+
+    <!--Profile Preferences File-->
+    <string name="profile_preferences_file">com.android.teaching.miprimeraapp.PROFILE_PREFERENCE_FILE</string>
 
 </resources>

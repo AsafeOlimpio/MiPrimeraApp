@@ -14,15 +14,16 @@ public class FilmsInteractor{
         if (films == null){
 
             //Adding the films
+            //
             FilmModel sherlockFm = new FilmModel(0,R.string.sherlock,R.string.lorem_ipsum,
-                    "https://www.youtube.com/watch?v=EQS7bRXrr5g",
+                    R.string.sSite,
                     R.drawable.sherlock,R.drawable.sherlock_holmes);
 
             FilmModel alienistFm = new FilmModel(1,R.string.alienist,R.string.lorem_ipsum,
-                    "https://www.youtube.com/watch?v=YtzgFRBvRy8",R.drawable.alienist,R.drawable.the_alienist);
+                    R.string.aSite,R.drawable.alienist,R.drawable.the_alienist);
 
             FilmModel tintinFm = new FilmModel(2,R.string.tintin,R.string.lorem_ipsum,
-                    "https://www.youtube.com/watch?v=7NWtW699XME",
+                    R.string.tSite,
                     R.drawable.tintin,R.drawable.tintin_land);
 
             films = new ArrayList<>();
@@ -45,5 +46,9 @@ public class FilmsInteractor{
             }
         }
         return null;
+    }
+
+    public int getFilmUrl(int id){
+        return films.get(id).getOfficialWebsiteUrl();
     }
 }

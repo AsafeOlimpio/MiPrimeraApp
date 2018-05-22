@@ -1,7 +1,11 @@
 package com.teaching.android.miprimeraapp.profileactivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +18,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.teaching.android.miprimeraapp.R;
 
+import java.io.File;
 import java.util.Calendar;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -88,6 +94,66 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar();
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+        Log.d("ProfileActivity","isReadable: " + isExternalStorageReadable());
+        Log.d("ProfileActivity","isWritable: " + isExternalStorageWritable());
+
+        if (isExternalStorageReadable()){
+            File imgFile = new File(getExternalFilesDir(null),"businessman_login.png");
+            if (imgFile.exists()){
+                ImageView myImage = findViewById(R.id.image_profile_view);
+                myImage.setImageURI(Uri.fromFile(imgFile));
+            }
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        SharedPreferences sharedPrefs = getSharedPreferences(getString(R.string.profile_preferences_file),Context.MODE_PRIVATE);
+
+        String username = sharedPrefs.getString("username","no_username");
+        usernameEditText.setText(username.toString());
+
+        String email = sharedPrefs.getString("email","no_email");
+        emailEditText.setText(email.toString());
+
+        String maleOrFemale = sharedPrefs.getString("gender","no_gender");
+        if (maleOrFemale.equalsIgnoreCase("Male")){
+            rbmale.setChecked(true);
+        }
+        else  if (maleOrFemale.equalsIgnoreCase("Female")){
+            rbfemale.setChecked(true);
+        }
+        String age = sharedPrefs.getString("age","no_age");
+        ageEditText.setText(age.toString());
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences sharedPrefs = getSharedPreferences(getString(R.string.profile_preferences_file), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString("username",usernameEditText.getText().toString());
+        editor.putString("email",emailEditText.getText().toString());
+        //Gender
+        if (rbmale.isChecked()){
+            editor.putString("gender","Male");
+        }
+        else if(rbfemale.isChecked()){
+            editor.putString("gender","Female");
+        }
+
+        else {
+            editor.remove("gender");
+        }
+
+        //Age
+        if (ageEditText != null){
+            editor.putString("age",ageEditText.getText().toString());
+        }
+        //Do not Forget to Aply the Changes!!!!!!
+        editor.apply();
     }
 
     /*Save Method*/
@@ -124,6 +190,15 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 //En este toast queremos referenciar a nuestra activity "ProfileActivity"
                 Toast.makeText(ProfileActivity.this,R.string.profile_dialog_deletinguser,Toast.LENGTH_LONG).show();
+
+                usernameEditText.setText("");
+
+                emailEditText.setText("");
+
+                rbmale.setChecked(false);
+                rbfemale.setChecked(false);
+
+                ageEditText.setText("");
             }
         });
 
@@ -144,7 +219,22 @@ public class ProfileActivity extends AppCompatActivity {
         //Now we create the dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
 
+    public boolean isExternalStorageWritable() {
+            String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
 
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
     }
 }

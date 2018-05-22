@@ -29,31 +29,34 @@ public class FilmDetailActivity extends AppCompatActivity implements FilmDetailV
     private FilmDetailPresenter filmDetailPresenter;
     private int currentPosition;
     private MyPagerAdapter myPagerAdapter;
+    private ViewPager myViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film_detail);
-        filmDetailPresenter = new FilmDetailPresenter();
-        currentPosition = getIntent().getIntExtra("position", 0);
 
         //Always declare the toolbar on the activity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
         setSupportActionBar(myToolbar);
-        ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        filmDetailPresenter = new FilmDetailPresenter();
+
+        currentPosition = getIntent().getIntExtra("position", 0);
+        filmDetailPresenter.startPresenting(this);
+        myViewPager = findViewById(R.id.view_pager);
+        myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+        myViewPager.setAdapter(myPagerAdapter);
+        myViewPager.setOffscreenPageLimit(1);
+        myViewPager.setCurrentItem(currentPosition);
+        getSupportActionBar().setTitle(myPagerAdapter.getPageTitle(currentPosition));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        filmDetailPresenter.startPresenting(this);
 
-        ViewPager myViewPager = findViewById(R.id.view_pager);
-        myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
-        myViewPager.setAdapter(myPagerAdapter);
-        myViewPager.setCurrentItem(currentPosition);
-        getSupportActionBar().setTitle(myPagerAdapter.getPageTitle(currentPosition));
         myViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

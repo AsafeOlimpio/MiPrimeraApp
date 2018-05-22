@@ -3,6 +3,7 @@
     package="com.teaching.android.miprimeraapp">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -11,34 +12,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".mainactivity.MainActivity" />
-
         <activity android:name=".SecondActivity" />
         <activity
             android:name=".profileactivity.ProfileActivity"
             android:parentActivityName=".loginactivity.LoginActivity" />
-
         <activity
             android:name=".loginactivity.LoginActivity"
             android:parentActivityName=".activitylist.ListActivity" />
         <activity android:name=".GalleryActivity" />
-
         <activity android:name=".activitylist.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".FragmentTestActivity"
             android:label="@string/title_activity_fragment_test"
             android:theme="@style/AppTheme" />
-
-        <activity android:name=".filmdetailactivity.FilmDetailActivity"
-            android:parentActivityName=".activitylist.ListActivity">
-        </activity>
+        <activity
+            android:name=".filmdetailactivity.FilmDetailActivity"
+            android:parentActivityName=".activitylist.ListActivity"></activity>
+        <activity android:name=".webview.WebViewActivity"></activity>
     </application>
 
 </manifest>

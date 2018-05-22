@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import com.teaching.android.miprimeraapp.Model.FilmModel;
 import com.teaching.android.miprimeraapp.R;
 import com.teaching.android.miprimeraapp.Interactors.FilmsInteractor;
+import com.teaching.android.miprimeraapp.webview.WebViewActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +37,7 @@ public class FilmDetailFragment extends Fragment {
         return fragment;
     }
 
-    private String url;
+    private int url;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +46,7 @@ public class FilmDetailFragment extends Fragment {
 
         // Inflate the layout for this fragment & get ID
         int filmId = getArguments().getInt("filmId",0);
-        FilmModel filmModel = new FilmsInteractor().getFilmWithId(filmId);
+        final FilmModel filmModel = new FilmsInteractor().getFilmWithId(filmId);
 
         //Change image
         ImageView photoBg = fragmentView.findViewById(R.id.photo);
@@ -62,7 +63,9 @@ public class FilmDetailFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                //"getContext" is used to get the context of the activity. Is necessary in some cases
+                Intent intent = new Intent(getContext(), WebViewActivity.class);
+                intent.putExtra("url",filmModel.getOfficialWebsiteUrl());
                 startActivity(intent);
             }
         });

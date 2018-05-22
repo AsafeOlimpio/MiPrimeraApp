@@ -2,9 +2,12 @@ package com.teaching.android.miprimeraapp.activitylist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +23,8 @@ import com.teaching.android.miprimeraapp.Interactors.FilmsInteractor;
 import com.teaching.android.miprimeraapp.loginactivity.LoginActivity;
 import com.teaching.android.miprimeraapp.R;
 import com.teaching.android.miprimeraapp.filmdetailactivity.FilmDetailActivity;
+
+import java.io.File;
 
 public class ListActivity extends AppCompatActivity {
     //ArrayList filmNames [];
@@ -67,7 +72,13 @@ public class ListActivity extends AppCompatActivity {
         //No necesita parametros
         getSupportActionBar();
 
+        File internalDirectory = getFilesDir();
+        File cacheDirectory = getCacheDir();
 
+        Log.d("ListActivity","Interno" + internalDirectory.getAbsolutePath());
+        Log.d("ListActivity","Cache2" + cacheDirectory.getAbsolutePath());
+
+        getExternalFilesDir(null);
     }
 
     private class MyAdapter extends BaseAdapter{
