@@ -9,8 +9,6 @@ import android.support.annotation.NonNull;
 public class User {
     @NonNull
     @PrimaryKey
-    @ColumnInfo(name = "userid")
-    private int userid;
     @ColumnInfo(name = "username")
     private String username;
     @ColumnInfo(name = "email")
@@ -21,15 +19,6 @@ public class User {
     private String age;
     @ColumnInfo (name = "gender")
     private String gender;
-
-    @NonNull
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(@NonNull int userid) {
-        this.userid = userid;
-    }
 
     public String getUsername() {
         return username;

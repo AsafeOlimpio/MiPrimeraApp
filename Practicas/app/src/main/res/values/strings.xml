@@ -45,6 +45,9 @@
     <string name="profile_dialog_no">No</string>
     <string name="profile_dialog_cancel">cancel</string>
     <string name="profile_dialog_deletinguser">Deleting User…</string>
+    
+    <!--Error Saving User-->
+    <string name="profile_sql_exception">Error: Invalid Username</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

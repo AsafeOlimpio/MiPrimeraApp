@@ -1,9 +1,11 @@
 package com.teaching.android.miprimeraapp.profileactivity;
 
 import android.app.DatePickerDialog;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteConstraintException;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.ActionBar;
@@ -23,6 +25,8 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.teaching.android.miprimeraapp.R;
+import com.teaching.android.miprimeraapp.database.AppDatabase;
+import com.teaching.android.miprimeraapp.database.User;
 
 import java.io.File;
 import java.util.Calendar;
@@ -40,16 +44,18 @@ public class ProfileActivity extends AppCompatActivity {
     private static final int LONG_DELAY = 350000; // 3.5 seconds
     private static final int SHORT_DELAY = 200000;
 
+    User user = new User();
+
     @Override
     public boolean onCreatePanelMenu(int featureId, Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_profile_save,menu);
+        inflater.inflate(R.menu.activity_profile_save, menu);
         return super.onCreatePanelMenu(featureId, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_save:
                 saveInternal();
         }
@@ -62,14 +68,14 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         usernameEditText = findViewById(R.id.user);
         emailEditText = findViewById(R.id.email);
-        passwordEditText = findViewById(R.id.email);
+        passwordEditText = findViewById(R.id.password);
         ageEditText = findViewById(R.id.age);
         rbmale = findViewById(R.id.radio_button_male);
         rbfemale = findViewById(R.id.radio_button_female);
         ageEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus){
+                if (hasFocus) {
                     //Show DatePickerDialog
                     new DatePickerDialog(ProfileActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
@@ -82,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
                             ageEditText.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
 
                         }
-                    },1997,7,23).show();
+                    }, 1997, 7, 23).show();
                 }
             }
         });
@@ -94,12 +100,12 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar();
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-        Log.d("ProfileActivity","isReadable: " + isExternalStorageReadable());
-        Log.d("ProfileActivity","isWritable: " + isExternalStorageWritable());
+        Log.d("ProfileActivity", "isReadable: " + isExternalStorageReadable());
+        Log.d("ProfileActivity", "isWritable: " + isExternalStorageWritable());
 
-        if (isExternalStorageReadable()){
-            File imgFile = new File(getExternalFilesDir(null),"businessman_login.png");
-            if (imgFile.exists()){
+        if (isExternalStorageReadable()) {
+            File imgFile = new File(getExternalFilesDir(null), "businessman_login.png");
+            if (imgFile.exists()) {
                 ImageView myImage = findViewById(R.id.image_profile_view);
                 myImage.setImageURI(Uri.fromFile(imgFile));
             }
@@ -110,73 +116,80 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        SharedPreferences sharedPrefs = getSharedPreferences(getString(R.string.profile_preferences_file),Context.MODE_PRIVATE);
+        SharedPreferences loginSharedPrefs = getSharedPreferences(getString(R.string.login_preference_file),Context.MODE_PRIVATE);
+        if (loginSharedPrefs != null) {
+            String userSharedPrefs = loginSharedPrefs.getString("username", "");
 
-        String username = sharedPrefs.getString("username","no_username");
-        usernameEditText.setText(username.toString());
+            AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
+                    "film_library_database").allowMainThreadQueries().build();
+            user = db.userDao().findByUsername(userSharedPrefs);
 
-        String email = sharedPrefs.getString("email","no_email");
-        emailEditText.setText(email.toString());
-
-        String maleOrFemale = sharedPrefs.getString("gender","no_gender");
-        if (maleOrFemale.equalsIgnoreCase("Male")){
-            rbmale.setChecked(true);
+            if (user != null) {
+                usernameEditText.setText(user.getUsername());
+                emailEditText.setText(user.getEmail());
+                if (user.getGender() != null) {
+                    if (user.getGender().equals("Male")) {
+                        rbmale.setChecked(true);
+                    }
+                    if (user.getGender().equals("Female")) {
+                        rbfemale.setChecked(true);
+                    }
+                }
+                ageEditText.setText(user.getAge());
+            }
         }
-        else  if (maleOrFemale.equalsIgnoreCase("Female")){
-            rbfemale.setChecked(true);
-        }
-        String age = sharedPrefs.getString("age","no_age");
-        ageEditText.setText(age.toString());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        SharedPreferences sharedPrefs = getSharedPreferences(getString(R.string.profile_preferences_file), Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString("username",usernameEditText.getText().toString());
-        editor.putString("email",emailEditText.getText().toString());
-        //Gender
-        if (rbmale.isChecked()){
-            editor.putString("gender","Male");
-        }
-        else if(rbfemale.isChecked()){
-            editor.putString("gender","Female");
-        }
-
-        else {
-            editor.remove("gender");
-        }
-
-        //Age
-        if (ageEditText != null){
-            editor.putString("age",ageEditText.getText().toString());
-        }
-        //Do not Forget to Aply the Changes!!!!!!
-        editor.apply();
     }
 
     /*Save Method*/
 
-    public void saveInternal(){
+    public void saveInternal() {
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
+                "film_library_database").allowMainThreadQueries().build();
 
-        Log.d("ProfileActivity","Username: " + usernameEditText.getText().toString());
-        Log.d("ProfileActivity","Email: " + emailEditText.getText().toString());
-        Log.d("ProfileActivity","Password: " + passwordEditText.getText().toString());
-        Log.d("ProfileActivity","age: " + ageEditText.getText().toString());
+        try {
+            user.setUsername(usernameEditText.getText().toString());
+            user.setEmail(emailEditText.getText().toString());
+            user.setPassword(passwordEditText.getText().toString());
+            user.setAge(ageEditText.getText().toString());
+
+            if (rbmale.isChecked()) {
+                user.setGender("Male");
+            } else if (rbfemale.isChecked()) {
+                user.setGender("Female");
+            }
+            db.userDao().insert(user);
+        } catch (SQLiteConstraintException ex) {
+            Toast.makeText(ProfileActivity.this, R.string.profile_sql_exception, Toast.LENGTH_LONG).show();
+        }
+
+        Log.d("ProfileActivity", "Username: " + usernameEditText.getText().toString());
+        Log.d("ProfileActivity", "Email: " + emailEditText.getText().toString());
+        Log.d("ProfileActivity", "Password: " + passwordEditText.getText().toString());
+        Log.d("ProfileActivity", "age: " + ageEditText.getText().toString());
 
         //Radio Buttons
 
-        if (rbmale.isChecked()){
-            Log.d("ProfileActivity","Male");
-        }
-        else if(rbfemale.isChecked()){
-            Log.d("ProfileActivity","Female");
+        if (rbmale.isChecked()) {
+            Log.d("ProfileActivity", "Male");
+        } else if (rbfemale.isChecked()) {
+            Log.d("ProfileActivity", "Female");
         }
     }
 
-    public void  saveData(View view) {
+    public void saveData(View view) {
         saveInternal();
+
+        usernameEditText.setText("");
+        emailEditText.setText("");
+        passwordEditText.setText("");
+        rbmale.setChecked(false);
+        rbfemale.setChecked(false);
+        ageEditText.setText("");
     }
 
     public void deleteUser(View view) {
@@ -189,12 +202,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //En este toast queremos referenciar a nuestra activity "ProfileActivity"
-                Toast.makeText(ProfileActivity.this,R.string.profile_dialog_deletinguser,Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileActivity.this, R.string.profile_dialog_deletinguser, Toast.LENGTH_LONG).show();
 
                 usernameEditText.setText("");
 
                 emailEditText.setText("");
-
                 rbmale.setChecked(false);
                 rbfemale.setChecked(false);
 
@@ -222,7 +234,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public boolean isExternalStorageWritable() {
-            String state = Environment.getExternalStorageState();
+        String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
             return true;
         }

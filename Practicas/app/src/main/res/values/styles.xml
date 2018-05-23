@@ -17,11 +17,20 @@
     </style>
 
     <style name="asafes_textStyle">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textSize">17sp</item>
+    <item name="android:padding">4dp</item>
+    <item name="android:textColor">@color/black</item>
+    <item name="android:textStyle">bold</item>
+</style>
+
+    <style name="asafes_text_white_style">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">17sp</item>
         <item name="android:padding">4dp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -37,6 +46,13 @@
     <style name="input_type">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="white_input_type">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="L_C_buttons">
