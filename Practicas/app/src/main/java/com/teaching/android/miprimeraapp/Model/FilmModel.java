@@ -2,19 +2,23 @@ package com.teaching.android.miprimeraapp.Model;
 
 public class FilmModel {
     private int id;
-    private int name;
-    private int description;
-    private int officialWebsiteUrl;
-    private int iconDrawable;
-    private int backgroundDrawable;
+    private String name;
+    private String description;
+    private String officialWebsiteUrl;
+    private String icon;
+    private String background;
 
-    public FilmModel(int id, int name, int description, int officialWebsiteUrl, int iconDrawable, int backgroundDrawable) {
+    public FilmModel(){
+
+    }
+
+    public FilmModel(int id, String name, String description, String officialWebsiteUrl, String iconDrawable, String backgroundDrawable) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.officialWebsiteUrl = officialWebsiteUrl;
-        this.iconDrawable = iconDrawable;
-        this.backgroundDrawable = backgroundDrawable;
+        this.icon = iconDrawable;
+        this.background = backgroundDrawable;
     }
 
     public int getId() {
@@ -25,43 +29,43 @@ public class FilmModel {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public int getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(int description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public int getOfficialWebsiteUrl() {
+    public String getOfficialWebsiteUrl() {
         return officialWebsiteUrl;
     }
 
-    public void setOfficialWebsiteUrl(int officialWebsiteUrl) {
+    public void setOfficialWebsiteUrl(String officialWebsiteUrl) {
         this.officialWebsiteUrl = officialWebsiteUrl;
     }
 
-    public int getIconDrawable() {
-        return iconDrawable;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setIconDrawable(int iconDrawable) {
-        this.iconDrawable = iconDrawable;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public int getBackgroundDrawable() {
-        return backgroundDrawable;
+    public String getBackground() {
+        return background;
     }
 
-    public void setBackgroundDrawable(int backgroundDrawable) {
-        this.backgroundDrawable = backgroundDrawable;
+    public void setBackground(String background) {
+        this.background = background;
     }
 }

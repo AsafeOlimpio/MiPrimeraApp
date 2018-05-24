@@ -14,9 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.app.ActionBar;
 
+import com.bumptech.glide.Glide;
+import com.teaching.android.miprimeraapp.Interactors.FIlmsFirebaseInteractor;
+import com.teaching.android.miprimeraapp.Interactors.FilmsInteractorCallback;
 import com.teaching.android.miprimeraapp.Model.FilmModel;
 import com.teaching.android.miprimeraapp.R;
 import com.teaching.android.miprimeraapp.Interactors.FilmsInteractor;
+import com.teaching.android.miprimeraapp.activitylist.ListActivity;
 import com.teaching.android.miprimeraapp.webview.WebViewActivity;
 
 /**
@@ -24,6 +28,7 @@ import com.teaching.android.miprimeraapp.webview.WebViewActivity;
  */
 public class FilmDetailFragment extends Fragment {
 
+    private FIlmsFirebaseInteractor fIlmsFirebaseInteractor;
 
     public FilmDetailFragment() {
         // Required empty public constructor
@@ -37,7 +42,7 @@ public class FilmDetailFragment extends Fragment {
         return fragment;
     }
 
-    private int url;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,28 +50,36 @@ public class FilmDetailFragment extends Fragment {
         View fragmentView = inflater.inflate(R.layout.fragment_film_detail, container, false);
 
         // Inflate the layout for this fragment & get ID
-        int filmId = getArguments().getInt("filmId",0);
-        final FilmModel filmModel = new FilmsInteractor().getFilmWithId(filmId);
+        final int filmId = getArguments().getInt("filmId",0);
+        fIlmsFirebaseInteractor = new FIlmsFirebaseInteractor();
+        fIlmsFirebaseInteractor.getFilms(new FilmsInteractorCallback() {
+            public String url;
 
-        //Change image
-        ImageView photoBg = fragmentView.findViewById(R.id.photo);
-        photoBg.setImageResource(filmModel.getBackgroundDrawable());
-
-        TextView text = fragmentView.findViewById(R.id.lorem_text);
-        text.setText(filmModel.getDescription());
-
-        //Define action for button whatch trailer
-        Button button = fragmentView.findViewById(R.id.whatch_trailer_button);
-
-        this.url = filmModel.getOfficialWebsiteUrl();
-
-        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //"getContext" is used to get the context of the activity. Is necessary in some cases
-                Intent intent = new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("url",filmModel.getOfficialWebsiteUrl());
-                startActivity(intent);
+            public void onFilmsAvailable() {
+                final FilmModel filmModel = fIlmsFirebaseInteractor.getFilmWithId(filmId);
+
+                //Change image
+                ImageView photoBg = getView().findViewById(R.id.photo);
+                Glide.with(getView()).load(filmModel.getIcon()).into(photoBg);
+                //photoBg.setImageResource(filmModel.getBackground());
+
+                TextView text = getView().findViewById(R.id.lorem_text);
+                text.setText(filmModel.getDescription());
+
+                //Define action for button whatch trailer
+                Button button = getView().findViewById(R.id.whatch_trailer_button);
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //"getContext" is used to get the context of the activity. Is necessary in some cases
+                        Intent intent = new Intent(getContext(), WebViewActivity.class);
+                        intent.putExtra("url",filmModel.getOfficialWebsiteUrl());
+                        startActivity(intent);
+                    }
+                });
+                this.url = filmModel.getOfficialWebsiteUrl();
             }
         });
 

@@ -23,8 +23,8 @@ public class WebViewActivity extends AppCompatActivity {
         WebView webView = findViewById(R.id.activity_web_view);
         //Para forzar que el contenido se abra en nuestra activity WebView
         // webView.setWebViewClient(new WebViewClient());
-        int stringResourceId = getIntent().getIntExtra("url",0);
-        String url = getString(stringResourceId);
+        String stringResourceId = getIntent().getStringExtra("url");
+        String url = stringResourceId;
         webView.loadUrl(url);
 
     }

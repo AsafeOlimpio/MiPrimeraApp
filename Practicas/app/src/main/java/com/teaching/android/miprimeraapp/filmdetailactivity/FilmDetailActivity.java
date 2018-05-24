@@ -101,7 +101,7 @@ public class FilmDetailActivity extends AppCompatActivity implements FilmDetailV
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            return getString(filmDetailPresenter.getFilms().get(position).getName());
+            return filmDetailPresenter.getFilms().get(position).getName();
         }
     }
 }
