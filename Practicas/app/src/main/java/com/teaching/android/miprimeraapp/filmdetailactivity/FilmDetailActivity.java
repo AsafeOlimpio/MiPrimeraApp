@@ -48,7 +48,7 @@ public class FilmDetailActivity extends AppCompatActivity implements FilmDetailV
         myViewPager = findViewById(R.id.view_pager);
         myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
         myViewPager.setAdapter(myPagerAdapter);
-        myViewPager.setOffscreenPageLimit(1);
+        myViewPager.setOffscreenPageLimit(5);
         myViewPager.setCurrentItem(currentPosition);
         getSupportActionBar().setTitle(myPagerAdapter.getPageTitle(currentPosition));
     }

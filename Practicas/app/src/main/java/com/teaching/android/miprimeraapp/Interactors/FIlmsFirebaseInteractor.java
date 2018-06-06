@@ -62,7 +62,7 @@ public class FIlmsFirebaseInteractor{
     }
 
     public FilmModel getFilmWithId(int id){
-        //In a normal for film.lenght would not be used if not film.size because is an ArrayList
+        //In a normal "for film.lenght" would not be used if not film.size because is an ArrayList
         //Get from films the movie with identifier id
         for (FilmModel film : films){
             if (film.getId()== id){

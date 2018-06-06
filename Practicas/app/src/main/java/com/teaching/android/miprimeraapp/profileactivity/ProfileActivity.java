@@ -4,10 +4,15 @@ import android.app.DatePickerDialog;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteConstraintException;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +34,12 @@ import com.teaching.android.miprimeraapp.database.AppDatabase;
 import com.teaching.android.miprimeraapp.database.User;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.text.SimpleDateFormat;
+import java.util.BitSet;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -100,16 +110,18 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar();
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
         Log.d("ProfileActivity", "isReadable: " + isExternalStorageReadable());
         Log.d("ProfileActivity", "isWritable: " + isExternalStorageWritable());
+        Log.d("onCreate","This is onCreate");
 
-        if (isExternalStorageReadable()) {
+        /*if (isExternalStorageReadable()) {
             File imgFile = new File(getExternalFilesDir(null), "businessman_login.png");
             if (imgFile.exists()) {
                 ImageView myImage = findViewById(R.id.image_profile_view);
                 myImage.setImageURI(Uri.fromFile(imgFile));
             }
-        }
+        }*/
     }
 
     @Override
@@ -140,13 +152,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
     /*Save Method*/
-
     public void saveInternal() {
         AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
                 "film_library_database").allowMainThreadQueries().build();
@@ -248,5 +254,41 @@ public class ProfileActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+    String myCurrentPhotoPath;
+
+    /**
+     *This Method Creates an image file
+     * @return Created imageFile
+     * @throws IOException
+     */
+    private File createImageFile(){
+        //Create an image file name
+       File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+       return new File(storageDir,"profile.jpg");
+    }
+
+    public void takeProfilePhoto(View view) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null){
+                File photoFile = createImageFile();
+                Uri photoUri = FileProvider.getUriForFile(this,"com.teaching.android.miprimeraapp",photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri);
+                startActivityForResult(takePictureIntent,100);
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("onResume","This is onResume");
+            //Defining the environment is needed
+        File imgFile = createImageFile();
+        if (imgFile.exists()) {
+            ImageView myImage = findViewById(R.id.image_profile_view);
+            myImage.setImageBitmap(BitmapFactory.decodeFile(imgFile.getAbsolutePath()));
+        }
     }
 }

@@ -2,9 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.teaching.android.miprimeraapp">
 
+    <!-- Phone Call Premission -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Internet Permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Network State Permission -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Geolocation Without GPS -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-feature android:name="android.hardware.location.network" />
+    <!-- Geolocation With GPS -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+    <!-- Write External Directory Permission -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Telling our app that we need the camera -->
+    <!--
+uses-feature android:name="androd.hardware.camera"
+        android:required="true"/
+    -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_add_shopping_cart_white_48dp"
@@ -21,21 +40,65 @@
             android:name=".loginactivity.LoginActivity"
             android:parentActivityName=".activitylist.ListActivity" />
         <activity android:name=".GalleryActivity" />
-        <activity android:name=".activitylist.ListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activitylist.ListActivity"></activity>
         <activity
             android:name=".FragmentTestActivity"
             android:label="@string/title_activity_fragment_test"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".filmdetailactivity.FilmDetailActivity"
-            android:parentActivityName=".activitylist.ListActivity"></activity>
-        <activity android:name=".webview.WebViewActivity"></activity>
+            android:parentActivityName=".activitylist.ListActivity" />
+        <activity android:name=".webview.WebViewActivity" />
+
+        <service android:name=".messaging_service.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".Instance_id_service.MyFirebaseInstanceIDService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/tintin" />
+
+        <receiver android:name=".broadcast_receiver.MyConnectivityReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Exposing A Public Route For our Photos With A provider -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.teaching.android.miprimeraapp"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".RecyclerViewActivity"></activity>
+        <activity android:name=".MediaPlayerActivity">
+
+        </activity>
+        <activity android:name=".ReactiveXActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

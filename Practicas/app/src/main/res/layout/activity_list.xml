@@ -14,19 +14,17 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:id="@+id/progressBar3"
+        style="@android:style/Widget.DeviceDefault.ProgressBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_marginEnd="171dp" />
-
+        android:layout_centerHorizontal="true" />
 
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/progressBar"></ListView>
+        android:layout_below="@+id/progressBar3"></ListView>
 
 </RelativeLayout>

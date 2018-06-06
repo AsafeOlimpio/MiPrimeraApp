@@ -2,6 +2,7 @@ package com.teaching.android.miprimeraapp.Presenter;
 
 import android.view.View;
 
+import com.teaching.android.miprimeraapp.Interactors.FIlmsFirebaseInteractor;
 import com.teaching.android.miprimeraapp.Interactors.FilmsInteractor;
 import com.teaching.android.miprimeraapp.Model.FilmModel;
 import com.teaching.android.miprimeraapp.view.FilmDetailView;

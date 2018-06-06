@@ -9,6 +9,7 @@
     <!--Error-->
 
     <string name="empty_user">User cannot be empty!</string>
+    <string name="no_connectivity">No Internet Connection</string>
 
     <!--App-->
 
@@ -45,7 +46,7 @@
     <string name="profile_dialog_no">No</string>
     <string name="profile_dialog_cancel">cancel</string>
     <string name="profile_dialog_deletinguser">Deleting User…</string>
-    
+
     <!--Error Saving User-->
     <string name="profile_sql_exception">Error: Invalid Username</string>
 
@@ -71,5 +72,34 @@
 
     <!--Profile Preferences File-->
     <string name="profile_preferences_file">com.android.teaching.miprimeraapp.PROFILE_PREFERENCE_FILE</string>
+
+    <!--Colors-->
+    <string-array name="colors">
+        <item>#086788</item>
+        <item>#07A0C3</item>
+        <item>#FFFFFF</item>
+        <item>#092327</item>
+        <item>#DD1C1A</item>
+        <item>#84DCC6</item>
+        <item>#6D5959</item>
+        <item>#D6EDFF</item>
+        <item>#ACD7EC</item>
+        <item>#8B95C9</item>
+        <item>#E5D9F2</item>
+        <item>#F5EFFF</item>
+        <item>#CDC1FF</item>
+        <item>#A594F9</item>
+        <item>#7371FC</item>
+
+    </string-array>
+
+    <string name="sea_blue">#086788</string>
+    <string name="blue_green">#07A0C3</string>
+    <string name="white">#FFFFFF</string>
+    <string name="dark_jungle_green">#092327</string>
+    <string name="maximum_red">#DD1C1A</string>
+
+    <string name="play_music">Play Music</string>
+    <string name="stop_music">Stop Music</string>
 
 </resources>

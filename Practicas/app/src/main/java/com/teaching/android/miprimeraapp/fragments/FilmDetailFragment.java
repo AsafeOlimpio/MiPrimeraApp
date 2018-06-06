@@ -61,7 +61,7 @@ public class FilmDetailFragment extends Fragment {
 
                 //Change image
                 ImageView photoBg = getView().findViewById(R.id.photo);
-                Glide.with(getView()).load(filmModel.getIcon()).into(photoBg);
+                Glide.with(getView()).load(filmModel.getBackground()).into(photoBg);
                 //photoBg.setImageResource(filmModel.getBackground());
 
                 TextView text = getView().findViewById(R.id.lorem_text);
